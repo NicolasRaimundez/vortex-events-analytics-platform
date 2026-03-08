@@ -1,0 +1,29 @@
+/* VORTEX EVENTS - MEDALLION ARCHITECTURE (BRONZE TO GOLD)
+  Purpose: Clean raw vendor data, fix regional date formats, and anonymize PII.
+  Source: Ticketing_Data.stg_ticket_sales_raw (Bronze)
+  Target: Ticketing_Data.prod_ticket_sales (Gold)
+*/
+
+CREATE OR REPLACE TABLE `vortex-events.Ticketing_Data.prod_ticket_sales` AS
+SELECT 
+  -- 1. FIX REGIONAL DATE ERRORS: Standardize DD/MM/YYYY strings to ISO Dates
+  -- This resolves the "Unable to parse range" error from raw CSV imports
+  SAFE.PARSE_DATE('%d/%m/%Y', event_date) AS event_date,
+
+  -- 2. DATA CLEANING: Remove whitespace and standardize casing for filtering
+  UPPER(TRIM(event_name)) AS event_name,
+  INITCAP(TRIM(location)) AS location,
+  INITCAP(TRIM(musical_genre)) AS musical_genre,
+
+  -- 3. ANONYMIZATION: Protect PII for 200k+ users while keeping data unique
+  -- In the real project, this ensured GDPR/PII compliance for the portfolio
+  GENERATE_UUID() AS client_id, 
+  CONCAT("user_", SUBSTR(CAST(FARM_FINGERPRINT(client_email) AS STRING), 1, 8), "@vortexevents.com") AS anonymized_email,
+
+  -- 4. METRICS: Ensure numerical consistency for Dashboard Scorecards
+  CAST(tickets_sold AS INT64) AS tickets_sold,
+  CAST(ticket_price AS FLOAT64) AS ticket_price,
+  (CAST(tickets_sold AS INT64) * CAST(ticket_price AS FLOAT64)) AS total_revenue
+
+FROM `vortex-events.Ticketing_Data.stg_ticket_sales_raw`
+WHERE event_date IS NOT NULL; -- Filter out empty staging rows
