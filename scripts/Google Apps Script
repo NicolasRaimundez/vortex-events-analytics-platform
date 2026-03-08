@@ -1,0 +1,50 @@
+/**
+ * VORTEX EVENTS - AUTOMATED DATA INGESTION
+ * Trigger: Time-based (Every Monday, 12:00 PM)
+ * Purpose: Extract vendor ticket CSVs from GMail and push to BigQuery Staging (Bronze).
+ */
+
+function importVendorCSVsToBigQuery() {
+  const projectId = 'your-gcp-project-id'; // Replaced for portfolio security
+  const datasetId = 'Ticketing_Data';
+  const tableId = 'stg_ticket_sales_raw';
+  
+  // 1. Search for weekly vendor emails matching Monday midday schedule
+  const threads = GmailApp.search('from:tickets@vendor.com has:attachment');
+  
+  if (threads.length === 0) {
+    Logger.log("No new vendor emails found.");
+    return;
+  }
+
+  // 2. Extract the latest attachment (Ticketmaster, Eventbrite, or Passline)
+  const message = threads[0].getMessages().pop();
+  const attachment = message.getAttachments()[0];
+  const csvData = attachment.getBlob().setContentType("application/octet-stream");
+
+  // 3. Define BigQuery Load Job Configuration
+  const job = {
+    configuration: {
+      load: {
+        destinationTable: {
+          projectId: projectId,
+          datasetId: datasetId,
+          tableId: tableId
+        },
+        // 'WRITE_APPEND' ensures we keep historical data from 200k+ records
+        writeDisposition: 'WRITE_APPEND', 
+        sourceFormat: 'CSV',
+        autodetect: true
+      }
+    }
+  };
+
+  // 4. Execute Load to Cloud Warehouse
+  // This bypasses the 10-million-cell limit of Google Sheets
+  try {
+    BigQuery.Jobs.insert(job, projectId, csvData);
+    Logger.log("Stage 1 Complete: Data pushed to BigQuery Bronze Layer.");
+  } catch (err) {
+    Logger.log("Error during Stage 1 ingestion: " + err.toString());
+  }
+}
