@@ -1,9 +1,3 @@
-To finalize your GitHub repository, we will now build a comprehensive `README.md` that serves as a technical walkthrough of your entire pipeline. This tells the complete story of how you moved from fragmented spreadsheets to a fully automated, cloud-native marketing ecosystem.
-
-Copy and paste the following into your GitHub `README.md` file:
-
----
-
 # 🌪️ Vortex Events: Automated Global Analytics Pipeline
 
 **Scale: 200,000+ Emails | Architecture: Medallion (Bronze to Gold) | Trigger: Monday 12:00 PM**
