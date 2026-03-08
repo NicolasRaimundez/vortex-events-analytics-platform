@@ -1,0 +1,72 @@
+To finalize your GitHub repository, we will now build a comprehensive `README.md` that serves as a technical walkthrough of your entire pipeline. This tells the complete story of how you moved from fragmented spreadsheets to a fully automated, cloud-native marketing ecosystem.
+
+Copy and paste the following into your GitHub `README.md` file:
+
+---
+
+# 🌪️ Vortex Events: Automated Global Analytics Pipeline
+
+**Scale: 200,000+ Emails | Architecture: Medallion (Bronze to Gold) | Trigger: Monday 12:00 PM**
+
+### 📋 Executive Summary
+
+This project modernized a global ticketing ecosystem by migrating a legacy database of over **200,000 unique customer records** from row-limited Google Sheets into a centralized **Google BigQuery** cloud warehouse. I engineered a zero-manual-touch pipeline that automates data ingestion, cleaning, visualization, and marketing activation.
+
+---
+
+### 🏗️ Step-by-Step Implementation
+
+#### **Step 1: Automated Ingestion (Google Apps Script)**
+
+The pipeline begins every Monday at midday. A custom **Google Apps Script** listener monitors a dedicated **GMail** inbox for vendor CSVs (Ticketmaster, Eventbrite, Passline).
+
+* **Logic**: The script extracts the attachment and pushes it directly to BigQuery as a native load job.
+* **Impact**: Bypasses Google Sheets cell limits and saves ~4 hours of manual data entry per week.
+
+#### **Step 2: Cloud Data Warehousing (BigQuery Staging)**
+
+Raw data lands in the **Bronze Layer** (`stg_ticket_sales_raw`).
+
+* **Configuration**: Native BigQuery tables were used instead of live-linked Sheets to ensure stability during high-volume scaling (200k+ rows).
+
+#### **Step 3: Data Transformation (SQL Stored Procedure)**
+
+Using a **SQL Stored Procedure**, I implemented a Medallion Architecture to create the **Gold Layer** (`prod_ticket_sales`).
+
+* **Cleaning**: Normalized regional date formats (`DD/MM/YYYY`) using `SAFE.PARSE_DATE` to resolve critical ingestion errors.
+* **Security**: All PII (emails/IDs) were anonymized via `FARM_FINGERPRINT` to maintain data privacy while preserving analytical integrity.
+
+#### **Step 4: Business Intelligence (Looker Studio)**
+
+The "Gold" data is visualized in a professional **Dark Mode Looker Studio** dashboard.
+
+* **Features**: Real-time KPI tracking for 173 emails across 5 major global events in Miami, Madrid, and Buenos Aires.
+* **UI/UX**: Card-based layout with interactive heatmaps to identify top-performing international markets.
+
+#### **Step 5: Marketing Activation (Perfit)**
+
+The refined customer segments are synced with **Perfit** (Marketing Automation).
+
+* **Execution**: Automated email campaigns are sent to specific users based on their "Favorite Musical Genre" or geographic location.
+
+#### **Step 6: Post-Event Feedback (Alchemer)**
+
+To close the loop, **Alchemer** surveys capture user sentiment and music preferences.
+
+* **Integration**: Survey data is piped back into BigQuery to enrich the customer profile for the next event cycle.
+
+---
+
+### 🛠️ Technical Stack
+
+* **Languages**: SQL, JavaScript (Apps Script).
+* **Cloud**: Google Cloud Platform (BigQuery).
+* **Tools**: GMail, Looker Studio, Perfit, Alchemer.
+
+---
+
+### 📈 Business Impact
+
+* **Centralization**: Combined multi-vendor data into a single source of truth.
+* **Scalability**: Successfully moved beyond the 10-million-cell limit of legacy spreadsheets.
+* **ROI**: Enabled hyper-segmented email marketing, significantly increasing engagement for high-attendance genres like Techno and Minimal.
