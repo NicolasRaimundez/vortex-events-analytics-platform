@@ -10,7 +10,6 @@
 <p align="center">
 <img src="images/project_architecture.png" width="800" alt="Vortex Events Architecture">
 </p>
-![Vortex Events Architecture](images/project_architecture.png)
 
 * **Medallion Flow:** Bronze (Raw) $\rightarrow$ Silver (Standardized) $\rightarrow$ Gold (Dimensional Star Schema).
 * **Privacy by Design:** All project data was fully **anonymized** to maintain data regulation compliance. PII (Emails/IDs) was hashed using `$FARM_FINGERPRINT$`, ensuring the dataset remains 100% usable for analytics while protecting individual privacy.
