@@ -2,72 +2,59 @@
 ![Data Model](images/vortex_data_model.png)
 
 
+# 🌪️ Vortex Events: Automated Global Data Pipeline
 
+**A 200,000+ Record Cloud Ingestion & Marketing Activation Ecosystem**
 
-# 🌪️ Vortex Events: Automated Global Analytics Pipeline
+> **The Problem:** A global events brand was "spreadsheet-locked," manually processing 200k+ records across fragmented vendors, hitting Google Sheets cell limits, and risking PII data leaks.
+> **The Solution:** I engineered a **Zero-Manual-Touch** Medallion Architecture in Google Cloud that automates everything from GMail ingestion to hyper-segmented marketing.
 
-**Scale: 200,000+ Emails | Architecture: Medallion (Bronze to Gold) | Trigger: Monday 12:00 PM**
+### 🖼️ Architecture & Strategy
 
-### 📋 Executive Summary
-
-This project modernized a global ticketing ecosystem by migrating a legacy database of over **200,000 unique customer records** from row-limited Google Sheets into a centralized **Google BigQuery** cloud warehouse. I engineered a zero-manual-touch pipeline that automates data ingestion, cleaning, visualization, and marketing activation.
+* **Medallion Flow:** Bronze (Raw) $\rightarrow$ Silver (Cleaned) $\rightarrow$ Gold (Star Schema).
+* **Privacy by Design:** I implemented a custom anonymization layer. To protect customer privacy, all PII (Emails/IDs) was hashed using $FARM\_FINGERPRINT$, ensuring the dataset is 100% GDPR/Data-Regulation compliant while remaining fully actionable for analytics.
 
 ---
 
-### 🏗️ Step-by-Step Implementation
+### 🏗️ Technical Execution
 
-#### **Step 1: Automated Ingestion (Google Apps Script)**
+#### **1. The Orchestrator (Apps Script & GMail)**
 
-The pipeline begins every Monday at midday. A custom **Google Apps Script** listener monitors a dedicated **GMail** inbox for vendor CSVs (Ticketmaster, Eventbrite, Passline).
+* **Automation:** A GMail listener triggers every Monday at 12:00 PM, extracting vendor CSVs (Ticketmaster, Eventbrite).
+* **Impact:** Replaced 4+ hours of manual weekly entry with a native BigQuery load job.
+* **Image to Show:** A snippet of your `gmail_ingestion.gs` code or a screenshot of the BigQuery "Job History" showing successful Monday loads.
 
-* **Logic**: The script extracts the attachment and pushes it directly to BigQuery as a native load job.
-* **Impact**: Bypasses Google Sheets cell limits and saves ~4 hours of manual data entry per week.
+#### **2. The Cloud Warehouse (SQL & BigQuery)**
 
-#### **Step 2: Cloud Data Warehousing (BigQuery Staging)**
+* **Data Integrity:** Resolved critical DD/MM/YYYY date-parsing errors using `SAFE.PARSE_DATE`.
+* **Star Schema:** Designed a 5-dimension Star Schema to optimize query performance for 200k+ rows.
+* **Image to Show:** The **Vortex Events - Data Model (ERD)** or a screenshot of the **BigQuery Schema Tree** showing your `Dim` and `Fact` tables.
 
-Raw data lands in the **Bronze Layer** (`stg_ticket_sales_raw`).
+#### **3. The Insights (Looker Studio)**
 
-* **Configuration**: Native BigQuery tables were used instead of live-linked Sheets to ensure stability during high-volume scaling (200k+ rows).
+* **KPIs:** Real-time tracking of global sales across Miami, Madrid, and Buenos Aires.
+* **UX:** A high-performance Dark Mode dashboard with interactive heatmaps.
+* **Image to Show:** The **Final Dark Mode Dashboard** screenshot.
 
-#### **Step 3: Data Transformation (SQL Stored Procedure)**
+---
 
-Using a **SQL Stored Procedure**, I implemented a Medallion Architecture to create the **Gold Layer** (`prod_ticket_sales`).
+### 📈 Business Impact & ROI
 
-* **Cleaning**: Normalized regional date formats (`DD/MM/YYYY`) using `SAFE.PARSE_DATE` to resolve critical ingestion errors.
-* **Security**: All PII (emails/IDs) were anonymized via `FARM_FINGERPRINT` to maintain data privacy while preserving analytical integrity.
-
-#### **Step 4: Business Intelligence (Looker Studio)**
-
-The "Gold" data is visualized in a professional **Dark Mode Looker Studio** dashboard.
-
-* **Features**: Real-time KPI tracking for 173 emails across 5 major global events in Miami, Madrid, and Buenos Aires.
-* **UI/UX**: Card-based layout with interactive heatmaps to identify top-performing international markets.
-
-#### **Step 5: Marketing Activation (Perfit)**
-
-The refined customer segments are synced with **Perfit** (Marketing Automation).
-
-* **Execution**: Automated email campaigns are sent to specific users based on their "Favorite Musical Genre" or geographic location.
-
-#### **Step 6: Post-Event Feedback (Alchemer)**
-
-To close the loop, **Alchemer** surveys capture user sentiment and music preferences.
-
-* **Integration**: Survey data is piped back into BigQuery to enrich the customer profile for the next event cycle.
+* **Scalability:** Successfully migrated from row-limited spreadsheets to a limitless Cloud Warehouse.
+* **Marketing Precision:** Automated the sync to **Perfit**, enabling segmentation by `musical_genre`.
+* **Engagement:** High-attendance genres like *Minimal* and *Techno* saw increased conversion through data-driven targeting.
 
 ---
 
 ### 🛠️ Technical Stack
 
-* **Languages**: SQL, JavaScript (Apps Script).
-* **Cloud**: Google Cloud Platform (BigQuery).
-* **Tools**: GMail, Looker Studio, Perfit, Alchemer.
+* **Languages:** SQL (BigQuery/DML), JavaScript (Google Apps Script).
+* **Platform:** Google Cloud (BigQuery, IAM, Cloud Scheduler).
+* **Ecosystem:** GMail, Looker Studio, Perfit (CRM), Alchemer (Surveys).
 
 ---
 
-### 📈 Business Impact
+### 💡 Key Learning: "Build for Scale"
 
-* **Centralization**: Combined multi-vendor data into a single source of truth.
-* **Scalability**: Successfully moved beyond the 10-million-cell limit of legacy spreadsheets.
-* **ROI**: Enabled hyper-segmented email marketing, significantly increasing engagement for high-attendance genres like Techno and Minimal.
+The biggest challenge was moving from a "Flat File" mindset to a **Dimensional Modeling** mindset. By separating data into Dimensions (Who, Where) and Facts (Sales), I ensured the platform could grow from 200k to 2 million records without slowing down.
 
