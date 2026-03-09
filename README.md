@@ -1,4 +1,4 @@
-!
+
 ![Data Model](images/vortex_data_model.png)
 
 
