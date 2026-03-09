@@ -1,15 +1,16 @@
 /**
- * VORTEX EVENTS - AUTOMATED DATA INGESTION
+ * VORTEX EVENTS - AUTOMATED DATA PIPELINE (END-TO-END)
  * Trigger: Time-based (Every Monday, 12:00 PM)
- * Purpose: Extract vendor ticket CSVs from GMail and push to BigQuery Staging (Bronze).
+ * Stage 1: GMail CSV Ingestion (Bronze)
+ * Stage 2: Trigger SQL Stored Procedure (Silver/Gold)
  */
 
 function importVendorCSVsToBigQuery() {
-  const projectId = 'your-gcp-project-id'; // Replaced for portfolio security
+  const projectId = 'your-gcp-project-id'; 
   const datasetId = 'Ticketing_Data';
   const tableId = 'stg_ticket_sales_raw';
   
-  // 1. Search for weekly vendor emails matching Monday midday schedule
+  // 1. Search for weekly vendor emails
   const threads = GmailApp.search('from:tickets@vendor.com has:attachment');
   
   if (threads.length === 0) {
@@ -17,21 +18,16 @@ function importVendorCSVsToBigQuery() {
     return;
   }
 
-  // 2. Extract the latest attachment (Ticketmaster, Eventbrite, or Passline)
+  // 2. Extract latest attachment
   const message = threads[0].getMessages().pop();
   const attachment = message.getAttachments()[0];
   const csvData = attachment.getBlob().setContentType("application/octet-stream");
 
-  // 3. Define BigQuery Load Job Configuration
-  const job = {
+  // 3. Define BigQuery Load Job (Bronze Layer)
+  const loadJob = {
     configuration: {
       load: {
-        destinationTable: {
-          projectId: projectId,
-          datasetId: datasetId,
-          tableId: tableId
-        },
-        // 'WRITE_APPEND' ensures we keep historical data from 200k+ records
+        destinationTable: { projectId, datasetId, tableId },
         writeDisposition: 'WRITE_APPEND', 
         sourceFormat: 'CSV',
         autodetect: true
@@ -39,12 +35,22 @@ function importVendorCSVsToBigQuery() {
     }
   };
 
-  // 4. Execute Load to Cloud Warehouse
-  // This bypasses the 10-million-cell limit of Google Sheets
   try {
-    BigQuery.Jobs.insert(job, projectId, csvData);
-    Logger.log("Stage 1 Complete: Data pushed to BigQuery Bronze Layer.");
+    // EXECUTE STAGE 1: Data Upload
+    BigQuery.Jobs.insert(loadJob, projectId, csvData);
+    Logger.log("Stage 1 Complete: Data pushed to BigQuery Bronze.");
+
+    // EXECUTE STAGE 2: Call the Master Stored Procedure
+    // This triggers the Star Schema refresh and location splitting
+    const queryRequest = {
+      query: `CALL \`${projectId}.${datasetId}.sp_Final_Model_Load\`();`,
+      useLegacySql: false
+    };
+    
+    BigQuery.Jobs.query(queryRequest, projectId);
+    Logger.log("Stage 2 Complete: Star Schema Refreshed (Silver/Gold).");
+
   } catch (err) {
-    Logger.log("Error during Stage 1 ingestion: " + err.toString());
+    Logger.log("Pipeline Error: " + err.toString());
   }
 }
