@@ -1,6 +1,5 @@
-![Vortex Events Architecture Diagram](images/project%20vortex%20events%20image.png)
-
-![Vortex Events Star Schema - Gold Layer](images/Vortex%20Events%20-%20Data%20Model.png)
+!
+![Data Model](images/vortex_data_model.png)
 
 
 
