@@ -1,3 +1,5 @@
+![Vortex Events Architecture Diagram](images/vortex_architecture_hero.png)
+![Vortex Events Star Schema - Gold Layer](images/gold_schema_erd.png)
 # 🌪️ Vortex Events: Automated Global Analytics Pipeline
 
 **Scale: 200,000+ Emails | Architecture: Medallion (Bronze to Gold) | Trigger: Monday 12:00 PM**
