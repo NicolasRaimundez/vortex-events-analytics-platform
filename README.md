@@ -3,7 +3,7 @@
 **Scale: 200,000+ Unique Records | Architecture: Medallion (Bronze to Gold) | Trigger: Monday 12:00 PM**
 
 > **The Problem:** A global events brand was "spreadsheet-locked," manually processing 200k+ records across fragmented vendors, hitting Google Sheets cell limits, and risking PII data leaks.
-> **The Solution:** I engineered a **Zero-Manual-Touch** Medallion Architecture in Google Cloud that automates everything from GMail ingestion to hyper-segmented marketing activation.
+> **The Solution:** I engineered a **Zero-Manual-Touch** Medallion Architecture in Google Cloud that automates everything from Gmail ingestion to hyper-segmented marketing activation.
 
 ## 🏗️ Architecture & Strategy
 
@@ -20,7 +20,7 @@
 
 ### 1. The Orchestrator (Google Apps Script)
 
-* **Automation:** A GMail listener triggers every Monday at 12:00 PM, extracting vendor CSVs (Ticketmaster, Eventbrite, Passline).
+* **Automation:** A Gmail listener triggers every Monday at 12:00 PM, extracting vendor CSVs (Ticketmaster, Eventbrite, Passline).
 * **Impact:** Replaced ~4 hours of manual weekly entry with a native BigQuery load job, bypassing the 10-million-cell limit of legacy spreadsheets.
 
 ### 2. The Cloud Warehouse (SQL & BigQuery)
