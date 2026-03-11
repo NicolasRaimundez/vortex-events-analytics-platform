@@ -46,8 +46,11 @@
 
 ## 📈 Business Impact & ROI
 
-* **Scalability:** Successfully migrated the ecosystem from row-limited Google Sheets to a limitless Cloud Warehouse.
-* **Marketing Precision:** Refined customer segments are synced with **Perfit** (Marketing Automation), enabling hyper-segmented email campaigns based on "Favorite Musical Genre."
+* **Scalability & Long-Term Worth:** Engineered to maintain high-performance levels as data grows from 200,000 to millions of records, ensuring the infrastructure remains a viable long-term asset.
+* **Marketing-Driven KPIs:** All metrics and Key Performance Indicators were specifically adjusted to provide direct solutions to the marketing team's needs, such as tracking high-attendance genres like Techno and Minimal to guide campaign spend.
+* **Real-Time Global Tracking:** Provides a live overview of sales and customer behavior across Miami, Madrid, and Buenos Aires.
+* **Accessibility for Non-Cloud Users:** The second page (Table View) features a familiar "Excel-style" data table designed specifically for team members unfamiliar with cloud environments or BigQuery, allowing them to apply their own filters and export raw data easily for offline use.
+* **UX/UI:** A professional Dark Mode interface featuring interactive heatmaps to identify top-performing international markets at a glance.
 * **Post-Event Loop:** Integrated **Alchemer** surveys back into BigQuery to enrich customer profiles for the next event cycle.
 
 ## 🛠️ Technical Stack
