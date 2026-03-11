@@ -1,5 +1,4 @@
-# 📨💃🕺 Dance Event Inbound
-# Scalable Email Automation for 200k+ Dance Fans
+# 📨💃🕺 Dance Event Inbound: Scalable Email Automation for 200k+ Dance Fans
 
 **Scale: 200,000+ Unique Records | Architecture: Medallion (Bronze to Gold) | Trigger: Monday 12:00 PM**
 
