@@ -21,7 +21,7 @@
 ### 1. The Orchestrator (Google Apps Script)
 
 <p align="center">
-<img src="images/vortex_data_model.png" width="800" alt="Vortex Events Star Schema">
+<img src="images/apps_script_logic.png" width="800" alt="Apps Script Logic">
 </p>
 
 * **Automation:** A Gmail listener triggers every Monday at 12:00 PM, extracting vendor CSVs (Ticketmaster, Eventbrite, Passline).
@@ -30,7 +30,7 @@
 ### 2. The Cloud Warehouse (SQL & BigQuery)
 
 <p align="center">
-<img src="images/apps_script_logic.png" width="800" alt="Apps Script Logic">
+<img src="images/vortex_data_model.png" width="800" alt="Vortex Events Star Schema">
 </p>
 
 * **Data Integrity:** Resolved critical DD/MM/YYYY date-parsing errors found in the 200k+ records using `SAFE.PARSE_DATE`.
