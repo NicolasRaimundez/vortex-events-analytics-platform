@@ -8,7 +8,7 @@
 ## 🏗️ Architecture & Strategy
 
 <p align="center">
-<img src="images/project vortex events image.png" width="800" alt="Vortex Events Architecture">
+<img src="images/Project_Architecture.png" width="800" alt="Project Architecture">
 </p>
 
 * **Medallion Flow:** Bronze (Raw) $\rightarrow$ Silver (Standardized) $\rightarrow$ Gold (Dimensional Star Schema).
