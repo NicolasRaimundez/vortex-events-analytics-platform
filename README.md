@@ -2,14 +2,14 @@
 
 **Scale: 200,000+ Unique Records | Architecture: Medallion (Bronze to Gold) | Trigger: Monday 12:00 PM**
 
-> **The Problem:** A global events brand was "spreadsheet-locked," manually processing 200k+ records across fragmented vendors, hitting Google Sheets cell limits, and risking PII data leaks.
+> **The Problem:** A global events brand was "spreadsheet-locked," manually processing 200k+ records across fragmented vendors, hitting Google Sheets cell limits, and risking Personally Identifiable Information (PII) data leaks.
 > **The Solution:** I engineered a **Zero-Manual-Touch** Medallion Architecture in Google Cloud that automates everything from Gmail ingestion to hyper-segmented marketing activation.
 
 ## 🏗️ Architecture & Strategy
 
 <p align="center">
 <img src="images/Project_Architecture.png" width="800" alt="Project Architecture">
-</p>
+</p>FF
 
 * **Medallion Flow:** Bronze (Raw) $\rightarrow$ Silver (Standardized) $\rightarrow$ Gold (Dimensional Star Schema).
 * **Privacy by Design:** All project data was fully **anonymized** to maintain data regulation compliance, PII (Emails/IDs), ensuring the dataset remains 100% usable for analytics while protecting individual privacy.
@@ -54,7 +54,7 @@
 
 * **Languages:** SQL (BigQuery/DML), JavaScript (Google Apps Script).
 * **Cloud:** Google Cloud Platform (BigQuery, IAM).
-* **Ecosystem:** GMail, Looker Studio, Perfit, Alchemer.
+* **Ecosystem:** Gmail, Looker Studio, Perfit, Alchemer.
 
 ## 💡 Key Learning: "Build for Scale"
 
