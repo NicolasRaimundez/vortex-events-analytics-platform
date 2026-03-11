@@ -9,7 +9,7 @@
 
 <p align="center">
 <img src="images/Project_Architecture.png" width="800" alt="Project Architecture">
-</p>FF
+</p>
 
 * **Medallion Flow:** Bronze (Raw) $\rightarrow$ Silver (Standardized) $\rightarrow$ Gold (Dimensional Star Schema).
 * **Privacy by Design:** All project data was fully **anonymized** to maintain data regulation compliance, PII (Emails/IDs), ensuring the dataset remains 100% usable for analytics while protecting individual privacy.
