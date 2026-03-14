@@ -1,5 +1,14 @@
 # 📨💃🕺Dance Event Inbound: Scalable Email Automation for 200k+ Fans
 
+![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white) ![Looker Studio](https://img.shields.io/badge/Looker_Studio-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white) ![Alchemer](https://img.shields.io/badge/Alchemer-005D91?style=for-the-badge&logo=surveymonkey&logoColor=white) ![Perfit](https://img.shields.io/badge/Perfit-7B52A1?style=for-the-badge&logo=email&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![BigQuery](https://img.shields.io/badge/Google%20BigQuery-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white)
+[SQL](https://img.shields.io/badge/SQL-CC2927?style=for-the-badge&logo=postgresql&logoColor=white) ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black) ![Google Apps Script](https://img.shields.io/badge/Google_Apps_Script-4285F4?style=for-the-badge&logo=google-apps-script&logoColor=white)
+[Google Cloud Platform](https://img.shields.io/badge/Google_Cloud-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white) ![BigQuery](https://img.shields.io/badge/BigQuery-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white) ![IAM](https://img.shields.io/badge/Identity_Access_Management-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white)
+![Looker Studio](https://img.shields.io/badge/Looker%20Studio-4285F4?style=for-the-badge&logo=looker&logoColor=white)
+
+---
+
 **Scale: 200,000+ Unique Records | Architecture: Medallion (Bronze to Gold) | Trigger: Monday 12:00 PM**
 
 > **The Problem:** A global events brand was "spreadsheet-locked," manually processing 200k+ records across fragmented vendors, hitting Google Sheets cell limits, and risking Personally Identifiable Information (PII) data leaks.
