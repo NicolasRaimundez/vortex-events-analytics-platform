@@ -52,9 +52,7 @@
 * **KPIs:** Real-time tracking of global sales across Miami, Madrid, and Buenos Aires.
 * **UX:** Interactive Dark Mode dashboards with heatmaps to identify top-performing international markets and musical genres.
 
-* **Link to Dashboard:** https://lookerstudio.google.com/reporting/dd45dc32-30ca-417a-83c7-59a3597ffe59
-
-🧑‍💻📊 [Link To Dashboard](https://lookerstudio.google.com/reporting/dd45dc32-30ca-417a-83c7-59a3597ffe59)
+* 🧑‍💻📊 [Link To Dashboard](https://lookerstudio.google.com/reporting/dd45dc32-30ca-417a-83c7-59a3597ffe59)
 
 ---
 
